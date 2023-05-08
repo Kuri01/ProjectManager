@@ -1,15 +1,11 @@
 const express = require('express');
+const dbConfig = require('./config/db.config.js');
 const app = express();
 const port = 3001;
 
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'admin',
-  database: 'ProjectManager',
-});
+const connection = mysql.createConnection(dbConfig);
 
 app.get('/szkolenia', (req, res) => {
   const sql = `SELECT f.Nazwa AS Firma, SUM(s.Koszt_szkolenia) AS Koszt_wszystkich_szkolen
